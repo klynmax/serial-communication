@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+// const { ReadlineParser } = require('@serialport/parser-readline')
+
 const app = express();
 
 app.use(morgan('dev'));
@@ -17,6 +19,12 @@ const port = new SerialPort({
     path: 'COM64',
     baudRate: 9600,
 })
+
+// const parser = port.pipe(new ReadlineParser({ delimiter: '\r\n' }))
+// parser.on('data', (line) => {
+//     console.log("Recebendo: " + line)
+//     port.write("Teste de envio!")
+// })
 
 port.write(message, function(err) {
     if (err) {
